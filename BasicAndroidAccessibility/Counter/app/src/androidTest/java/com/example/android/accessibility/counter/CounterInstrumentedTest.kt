@@ -22,8 +22,10 @@ import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.withId
 import androidx.test.espresso.matcher.ViewMatchers.withText
-import androidx.test.rule.ActivityTestRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import androidx.test.rule.ActivityTestRule
+import com.google.android.apps.common.testing.accessibility.framework.AccessibilityCheckResultUtils.matchesCheckNames
+import org.hamcrest.Matchers.`is`
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
@@ -33,7 +35,8 @@ import org.junit.runner.RunWith
 class CounterInstrumentedTest {
     @Rule
     @JvmField
-    var mActivityTestRule: ActivityTestRule<MainActivity> = ActivityTestRule(MainActivity::class.java)
+    var mActivityTestRule: ActivityTestRule<MainActivity> =
+        ActivityTestRule(MainActivity::class.java)
 
     @Test
     fun testIncrement() {
@@ -47,8 +50,7 @@ class CounterInstrumentedTest {
         @BeforeClass
         @JvmStatic
         fun enableAccessibilityChecks() {
-            // TODO: uncomment to enable accessibility checks.
-            // AccessibilityChecks.enable()
+            AccessibilityChecks.enable().setRunChecksFromRootView(true)
         }
     }
 }
